@@ -10,7 +10,7 @@ notesController.createNewNote = async (req, res) => {
     const { title, description } = req.body
     const newNote = new Note({ title, description })
     await newNote.save()
-    res.send('note created')
+    res.redirect('/notes')
 }
 
 notesController.renderNotes = async (req, res) => {
@@ -26,8 +26,9 @@ notesController.updateNote = (req, res) => {
     res.send('Updated note')
 }
 
-notesController.deleteNote = (req, res) => {
-    res.send('Note deleted')
+notesController.deleteNote = async (req, res) => {
+    await Note.findByIdAndDelete(req.params.id)
+    res.redirect('/notes')
 }
 
 module.exports = notesController

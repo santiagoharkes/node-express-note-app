@@ -6,6 +6,7 @@ const handlebars = require('handlebars')
 const exphbs = require('express-handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const path = require('path')
+const methodOverride = require('method-override')
 
 // Inicializamos
 const app = express()
@@ -37,6 +38,9 @@ app.set('view engine', '.hbs')
 // Cada vez que llegan datos de un formulario por cualquier metodo, lo trata de convertir a formato JSON.
 app.use(express.urlencoded({ extended: false }))
 
+// MethodOverride es una libreria que ayuda a los forms html a que puedan usar varios metodos (como delete) que serían difíciles de hacer
+// Se envia a traves de post, pero con una query ?_method=DELETE, se le agrega el metodo que quieras
+app.use(methodOverride('_method'))
 
 // ------- Global variables
 

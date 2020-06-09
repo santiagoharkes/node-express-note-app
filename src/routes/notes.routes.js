@@ -17,4 +17,5 @@ router.get('/edit/:id', renderEditForm)
 router.put('/edit/:id', updateNote)
 // DELETE NOTE
 router.delete('/notes/delete/:id', deleteNote)
+
 module.exports = router
