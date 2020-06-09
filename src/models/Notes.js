@@ -18,6 +18,6 @@ const NoteSchema = new Schema({
 })
 
 // Todavía no interactuamos con la base de datos
-// Entonces creamos una base 
+// Entonces creamos una colección 
 
 module.exports = model('Note', NoteSchema)

@@ -1,3 +1,7 @@
 body {
     background-color: #1488cc;
 }
+
+.row * {
+    transition: 0.3 ease-out;
+}
