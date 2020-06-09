@@ -38,9 +38,7 @@ app.use(express.urlencoded({ extended: false }))
 // ------- Global variables
 
 // ------- Routes
-app.get('/', (req, res) => {
-    res.render('index')
-})
+app.use(require('./routes/index.routes'))
 
 // ------- Static files
 
