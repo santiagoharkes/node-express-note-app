@@ -7,6 +7,8 @@ const exphbs = require('express-handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const path = require('path')
 const methodOverride = require('method-override')
+const flash = require('connect-flash')
+const session = require('express-session')
 
 // Inicializamos
 const app = express()
@@ -42,7 +44,22 @@ app.use(express.urlencoded({ extended: false }))
 // Se envia a traves de post, pero con una query ?_method=DELETE, se le agrega el metodo que quieras
 app.use(methodOverride('_method'))
 
+// Este es el modulo que nos va a ayudar a guardar mensajes tipo estados en el servidor para comunicar de pagina en pagina
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(flash())
+
 // ------- Global variables
+
+// Definimos variables globales, por ejemplo queremos definir la variable global de flash, que es donde se guardan los mensajes que vamos a pasar a diferentes sesiones
+// Creamos nuestro propio middleware
+app.use((req, res, next) => {
+    res.locals.suc_msg = req.flash('suc_msg')
+    next();
+})
 
 // ------- Routes
 app.use(require('./routes/index.routes'))
