@@ -1,5 +1,7 @@
 const userController = {}
 
+const passport = require('passport')
+
 const User = require('../models/User')
 
 userController.renderSignupForm = (req, res) => {
@@ -41,12 +43,20 @@ userController.renderSigninForm = (req, res) => {
     res.render('users/signin')
 }
 
-userController.userSignIn = (req, res) => {
-    res.send('Signin')
-}
+// Hay varias formas para incorporar passport acá, esta es una
+// Authenticate, lo que hace es usar la función que escribimos en config de 'login'
+// Le pasamos un 'local', que es por defecto, y un objeto, que es lo que tiene que hacer passport despues de que valide, si hay errores o no
+
+userController.userSignIn = passport.authenticate('local', {
+    failureRedirect: '/signin',
+    successRedirect: '/notes',
+    failureFlash: true
+})
 
 userController.logout = (req, res) => {
-    res.send('logOut')
+    req.logout()
+    req.flash('suc_msg', 'See you soon!')
+    res.redirect('/')
 }
 
 module.exports = userController

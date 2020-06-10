@@ -12,6 +12,10 @@ const NoteSchema = new Schema({
         type: String,
         required: true,
     },
+    user: {
+        type: String,
+        required: true,
+    },
 }, {
     // Esto lo trae mongoose, y le agrega "CreatedAt" y "UpdatedAt"
     timestamps: true,

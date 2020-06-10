@@ -4,18 +4,18 @@ router = Router()
 
 const { renderNoteForm, createNewNote, renderNotes, renderEditForm, updateNote, deleteNote } = require('../controllers/notes.controller')
 
+const { isAuthenticated } = require('../helpers/auth')
+
 // NUEVA NOTA, toma la ruta y postea una nueva
-router.get('/notes/add', renderNoteForm)
-router.post('/notes/new-note', createNewNote)
+router.get('/notes/add', isAuthenticated, renderNoteForm)
+router.post('/notes/new-note', isAuthenticated, createNewNote)
 
 // GET ALL
-router.get('/notes', renderNotes)
-// GET ALL
-router.get('/notes', renderNotes)
+router.get('/notes', isAuthenticated, renderNotes)
 // EDIT-UPDATE NOTES
-router.get('/notes/edit/:id', renderEditForm)
-router.put('/notes/edit/:id', updateNote)
+router.get('/notes/edit/:id', isAuthenticated, renderEditForm)
+router.put('/notes/edit/:id', isAuthenticated, updateNote)
 // DELETE NOTE
-router.delete('/notes/delete/:id', deleteNote)
+router.delete('/notes/delete/:id', isAuthenticated, deleteNote)
 
 module.exports = router

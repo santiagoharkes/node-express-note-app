@@ -8,20 +8,19 @@ notesController.renderNoteForm = (req, res) => {
 
 notesController.createNewNote = async (req, res) => {
     const { title, description } = req.body
-    const newNote = new Note({ title, description })
+    const newNote = new Note({ title, description, user: req.user.id })
     await newNote.save()
     req.flash('suc_msg', 'Note added successfully!')
     res.redirect('/notes')
 }
 
 notesController.renderNotes = async (req, res) => {
-    const notes = await Note.find()
+    const notes = await Note.find({ user: req.user.id })
     res.render('notes/allNotes', { notes })
 }
 
 notesController.renderEditForm = async (req, res) => {
     const note = await Note.findById(req.params.id)
-    console.log(note)
     res.render('notes/edit-note.hbs', { note })
 }
 
