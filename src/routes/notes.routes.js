@@ -13,8 +13,8 @@ router.get('/notes', renderNotes)
 // GET ALL
 router.get('/notes', renderNotes)
 // EDIT-UPDATE NOTES
-router.get('/edit/:id', renderEditForm)
-router.put('/edit/:id', updateNote)
+router.get('/notes/edit/:id', renderEditForm)
+router.put('/notes/edit/:id', updateNote)
 // DELETE NOTE
 router.delete('/notes/delete/:id', deleteNote)
 
