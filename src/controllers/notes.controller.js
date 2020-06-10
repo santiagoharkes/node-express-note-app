@@ -21,6 +21,10 @@ notesController.renderNotes = async (req, res) => {
 
 notesController.renderEditForm = async (req, res) => {
     const note = await Note.findById(req.params.id)
+    if (note.user != req.user.id) {
+        req.flash('error_msg', 'The mail is already in use')
+        return res.redirect('/notes')
+    }
     res.render('notes/edit-note.hbs', { note })
 }
 
