@@ -58,6 +58,7 @@ app.use(flash())
 // Creamos nuestro propio middleware
 app.use((req, res, next) => {
     res.locals.suc_msg = req.flash('suc_msg')
+    res.locals.error_msg = req.flash('error_msg')
     next();
 })
 
